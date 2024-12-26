@@ -2,13 +2,21 @@
 
 GopherEconomy is a Discord bot built with [Go (Golang)](https://go.dev/) to provide currenty  quote, economic data, and market insights. Designed for simplicity and efficiency, Gophernomy is perfect for anyone who wants quick access to market data.
 
-## Features
+## Features 0.0.1
 
-- [ ] 💱 USD/BRL Conversion: Check the current price of US Dollars in Brazilian Real.
+- [x] 💱 USD/BRL Conversion: Check the current price of US Dollars in Brazilian Real.
 
-- [ ] ₿ BTC/USD Conversion: Check the current price of Bitcoin in US Dollars.
+- [x] 💱 BTC/USD Conversion: Check the current price of Bitcoin in US Dollars.
 
-- [ ] ₿ EUR/BRL Conversion: Check the current price of Euro in Brazilian Real.
+- [x] 💱 EUR/BRL Conversion: Check the current price of Euro in Brazilian Real.
+
+- [x] 💱 ETH/BRL Conversion: Check the current price of Ethereum in Brazilian Real.
+
+- [x] 📜 HELP command: List all the commands.
+
+- [ ] 🧪 Implement Tests: Create and add tests to ensure functionality and code quality.
+
+- [ ] 🚀 Implement Deploy: Set up and automate the deployment process to ensure continuous and seamless delivery of new versions.
 
 # Getting Started
 
@@ -37,7 +45,7 @@ go mod tidy
 
 ```makefile
 DISCORD_TOKEN=your-discord-bot-token
-API_KEY=your-currency-or-crypto-api-key
+BASE_URL="url"
 ```
 
 - Run the bot:
@@ -49,9 +57,11 @@ go run main.go
 # Discord Commands
 
 ```makefile
-/brl Get the current exchange rate of BRL to USD.
-/btc Get the current price of Bitcoin in USD.
-/help Display the list of available commands.
+!dolar Get the current exchange rate of USD to BRL.
+!btc Get the current price of Bitcoin in BRL.
+!eth Get the current price of Ethereum in BRL.
+!euro Get the current price of Euro in BRL.
+!help Display the list of available commands.
 ```
 
 # Contributing
