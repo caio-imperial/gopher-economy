@@ -1,4 +1,11 @@
-# GopherEconomy 
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="docs/images/logo.png" alt="Logo" height="150">
+  </a>
+
+  <h3 align="center">Gopher Economy</h3>
+</div>
 
 GopherEconomy is a Discord bot built with [Go (Golang)](https://go.dev/) to provide currenty  quote, economic data, and market insights. Designed for simplicity and efficiency, Gophernomy is perfect for anyone who wants quick access to market data.
 
