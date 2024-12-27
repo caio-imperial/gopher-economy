@@ -134,10 +134,10 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// send quote current message in the channel if result.Bid has a value
 	if result.Bid > 0 {
 		// choose the correct symbol to send in discord message
-		quoteSymbol := "R$"
+		quoteSymbol := "$"
 		switch quoteCurrencys[1] {
-		case "usd":
-			quoteSymbol = "$"
+		case "brl":
+			quoteSymbol = "R$"
 		case "eur":
 			quoteSymbol = "€"
 		}
