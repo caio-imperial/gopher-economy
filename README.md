@@ -20,7 +20,7 @@ GopherEconomy is a Discord bot built with [Go (Golang)](https://go.dev/) to prov
 
 ## Features 0.2.0
 
-- [ ] 💱 Universal Conversion: Check the current price of any QuoteCurrency.
+- [x] 💱 Universal Conversion: Check the current price of any QuoteCurrency.
 
 
 ## Features 0.1.0
