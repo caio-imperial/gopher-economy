@@ -93,7 +93,7 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		result, err = economia.GetQuote("EUR-BRL")
 	case "!btc", "!bitcoin":
 		result, err = economia.GetQuote("BTC-BRL")
-	case "!btc dolar", "!bitcoin dolar":
+	case "!btc dollar", "!bitcoin dollar":
 		result, err = economia.GetQuote("BTC-USD")
 	case "!eth", "!etherium":
 		result, err = economia.GetQuote("ETH-BRL")
