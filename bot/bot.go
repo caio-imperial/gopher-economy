@@ -104,7 +104,7 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 			"!dolar -> Show Current Dollar in BRL\n",
 			"!euro -> Show Current Euro in BRL\n",
 			"!btc or !bitcoin -> Show Current BTC in BRL\n",
-			"!btc dolar or !bitcoin dolar or !btc usd or !bitcoin usd -> Show Current BTC in USD-Dollar \n",
+			"!btc dollar or !bitcoin dollar or !btc usd or !bitcoin usd -> Show Current BTC in USD-Dollar \n",
 			"!eth or !etherium -> Show Current ETH in BRL\n",
 			"```\n",
 		))
