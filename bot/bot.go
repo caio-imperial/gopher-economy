@@ -85,24 +85,24 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Compares the received message and responds if the condition is true.
 	// economia.GetQuote return quote currency
 	switch m.Content {
-	case "!dolar ptax":
+	case "!dollar ptax, !usd ptax":
 		result, err = economia.GetQuote("USD-BRLPTAX")
-	case "!dolar":
+	case "!dollar, !usd":
 		result, err = economia.GetQuote("USD-BRL")
-	case "!euro":
+	case "!euro, !eur":
 		result, err = economia.GetQuote("EUR-BRL")
 	case "!btc", "!bitcoin":
 		result, err = economia.GetQuote("BTC-BRL")
-	case "!btc dollar","!btc usd", "!bitcoin dollar", "!bitcoin usd":
+	case "!btc dollar", "!btc usd", "!bitcoin dollar", "!bitcoin usd":
 		result, err = economia.GetQuote("BTC-USD")
 	case "!eth", "!etherium":
 		result, err = economia.GetQuote("ETH-BRL")
 	case "!help":
 		s.ChannelMessageSend(m.ChannelID, fmt.Sprint(
 			"```makefile\n",
-			"!dolar ptax -> Show Current PTAX Dollar in BRL\n",
-			"!dolar -> Show Current Dollar in BRL\n",
-			"!euro -> Show Current Euro in BRL\n",
+			"!dollar ptax or !usd ptax -> Show Current PTAX Dollar in BRL\n",
+			"!dollar or !usd -> Show Current Dollar in BRL\n",
+			"!euro or !eur -> Show Current Euro in BRL\n",
 			"!btc or !bitcoin -> Show Current BTC in BRL\n",
 			"!btc dollar or !bitcoin dollar or !btc usd or !bitcoin usd -> Show Current BTC in USD-Dollar \n",
 			"!eth or !etherium -> Show Current ETH in BRL\n",
