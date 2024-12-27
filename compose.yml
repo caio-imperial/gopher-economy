@@ -1,0 +1,8 @@
+services:
+  gopher-economy:
+    build:
+      context: .
+    environment:
+       - .env
+    stdin_open: true
+    tty: true
