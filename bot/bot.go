@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
@@ -79,6 +80,8 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
+	var currencySymbol string
+	var quoteCurrencys []string
 	err := error(nil)
 	result := economia.QuoteCurrency{}
 
@@ -106,20 +109,41 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 			"!btc or !bitcoin -> Show Current BTC in BRL\n",
 			"!btc dollar or !bitcoin dollar or !btc usd or !bitcoin usd -> Show Current BTC in USD-Dollar \n",
 			"!eth or !etherium -> Show Current ETH in BRL\n",
+			"!q <Abbreviation1> <Abbreviation2> -> Show Current <Abbreviation1> in <Abbreviation2> \n",
+			"Example: \n!q usd brl -> Show Current Dollar in BR\n",
 			"```\n",
 		))
 	// Do nothing if none of the conditions are satisfied.
 	default:
-		return
+		if !strings.HasPrefix(m.Content, "!q") {
+			return
+		}
+		currencySymbol, quoteCurrencys, err = NomalizationQuotes(m.Content)
+		if err != nil {
+			fmt.Print(err)
+			return
+		}
+		result, err = economia.GetQuote(currencySymbol)
 	}
 
 	if err != nil {
 		fmt.Print(err)
+		s.ChannelMessageSend(m.ChannelID, "failed to search quote currency")
 	}
 
 	// send quote current message in the channel if result.Bid has a value
 	if result.Bid > 0 {
-		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("R$ %.2f", result.Bid))
+		// choose the correct symbol to send in discord message
+		quoteSymbol := "R$"
+		switch quoteCurrencys[1] {
+		case "usd":
+			quoteSymbol = "$"
+		case "eur":
+			quoteSymbol = "€"
+		}
+
+		// send discord message
+		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("%s %.2f", quoteSymbol, result.Bid))
 	}
 
 }
