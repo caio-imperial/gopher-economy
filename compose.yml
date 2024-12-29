@@ -2,7 +2,7 @@ services:
   gopher-economy:
     build:
       context: .
-    environment:
+    env_file:
        - .env
     stdin_open: true
     tty: true
