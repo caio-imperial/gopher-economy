@@ -46,11 +46,8 @@ type QuoteCurrency struct {
 
 // Init initializes all environment variables using in package
 func Init() (err error) {
-	err = godotenv.Load(".env")
-	if err != nil {
-		fmt.Println("Erro ao carregar o arquivo .env", err)
-		return
-	}
+	godotenv.Load(".env")
+
 	baseUrl = os.Getenv("BASE_URL")
 	if baseUrl == "" {
 		fmt.Printf("BASE_URL not set in environment\n")

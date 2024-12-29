@@ -16,7 +16,13 @@ GopherEconomy is a Discord bot built with [Go (Golang)](https://go.dev/) to prov
 
 - [ ] 🧪 Implement Tests: Create and add tests to ensure functionality and code quality.
 
-- [ ] 🚀 Implement Deploy: Set up and automate the deployment process to ensure continuous and seamless delivery of new versions.
+## Fix 0.3.1
+
+- [x] Fix: run application without .env.
+
+## Features 0.3.0
+
+- [x] 🚀 Implement Deploy: Set up and automate the deployment process to ensure continuous and seamless delivery of new versions.
 
 ## Features 0.2.0
 
@@ -62,7 +68,13 @@ cd GopherEconomy
 go mod tidy
 ```
 
-- Set up your environment variables:
+- create .env
+
+```bash
+cp .env.template .env
+```
+
+- Set up your environment variables in file `./.env`:
 
 ```makefile
 DISCORD_TOKEN=your-discord-bot-token
@@ -78,11 +90,15 @@ go run main.go
 # Discord Commands
 
 ```makefile
-!dolar Get the current exchange rate of USD to BRL.
-!btc Get the current price of Bitcoin in BRL.
-!eth Get the current price of Ethereum in BRL.
-!euro Get the current price of Euro in BRL.
-!help Display the list of available commands.
+!dollar ptax or !usd ptax -> Show Current PTAX Dollar in BRL (deprecated)
+!dollar or !usd -> Show Current Dollar in BRL (deprecated)
+!euro or !eur -> Show Current Euro in BRL (deprecated)
+!btc or !bitcoin -> Show Current BTC in BRL (deprecated)
+!btc dollar or !bitcoin dollar or !btc usd or !bitcoin usd -> Show Current BTC in USD-Dollar (deprecated)
+!q <Abbreviation1> <Abbreviation2> -> Show Current <Abbreviation1> in <Abbreviation2>
+Example:
+!q usd brl -> Show Current Dollar in BR
+!eth or !etherium -> Show Current ETH in BRL
 ```
 
 # Contributing

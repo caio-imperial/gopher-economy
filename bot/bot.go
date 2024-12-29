@@ -19,23 +19,19 @@ var (
 
 // Init initializes all environment variables, configures the Discord bot,
 // and registers callback functions on the handler.
-func Init() {
-	err := godotenv.Load(".env")
-	//start package economia
-	if err != nil {
-		fmt.Printf("error loading .env file: %v\n", err)
-		return
-	}
-
-	err = economia.Init()
-	if err != nil {
-		fmt.Printf("error economia.Init(): %v\n", err)
-		return
-	}
+func Init() (err error) {
+	godotenv.Load(".env")
 
 	discord_token = os.Getenv("DISCORD_TOKEN")
 	if discord_token == "" {
 		fmt.Printf("DISCORD_TOKEN not set in environment\n")
+		return
+	}
+
+	//start package economia
+	err = economia.Init()
+	if err != nil {
+		fmt.Printf("error economia.Init(): %v\n", err)
 		return
 	}
 
@@ -69,6 +65,8 @@ func Init() {
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-sc
+
+	return
 }
 
 // messageHandler is a callback function that processes messages from the channel
