@@ -49,7 +49,6 @@ func Init() (err error) {
 	err = godotenv.Load(".env")
 	if err != nil {
 		fmt.Println("Erro ao carregar o arquivo .env", err)
-		return
 	}
 	baseUrl = os.Getenv("BASE_URL")
 	if baseUrl == "" {

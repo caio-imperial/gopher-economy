@@ -21,21 +21,20 @@ var (
 // and registers callback functions on the handler.
 func Init() {
 	err := godotenv.Load(".env")
-	//start package economia
 	if err != nil {
 		fmt.Printf("error loading .env file: %v\n", err)
-		return
-	}
-
-	err = economia.Init()
-	if err != nil {
-		fmt.Printf("error economia.Init(): %v\n", err)
-		return
 	}
 
 	discord_token = os.Getenv("DISCORD_TOKEN")
 	if discord_token == "" {
 		fmt.Printf("DISCORD_TOKEN not set in environment\n")
+		return
+	}
+
+	//start package economia
+	err = economia.Init()
+	if err != nil {
+		fmt.Printf("error economia.Init(): %v\n", err)
 		return
 	}
 
