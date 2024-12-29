@@ -1,0 +1,15 @@
+# fly.toml app configuration file generated for gopher-economy on 2024-12-29T11:54:33Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'gopher-economy'
+primary_region = 'gig'
+
+[build]
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 256
