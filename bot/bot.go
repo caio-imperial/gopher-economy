@@ -78,70 +78,28 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	var currencySymbol string
-	var quoteCurrencys []string
-	err := error(nil)
-	result := economia.QuoteCurrency{}
-
 	// Compares the received message and responds if the condition is true.
-	// economia.GetQuote return quote currency
-	switch m.Content {
-	case "!dollar ptax, !usd ptax":
-		result, err = economia.GetQuote("USD-BRLPTAX")
-	case "!dollar, !usd":
-		result, err = economia.GetQuote("USD-BRL")
-	case "!euro, !eur":
-		result, err = economia.GetQuote("EUR-BRL")
-	case "!btc", "!bitcoin":
-		result, err = economia.GetQuote("BTC-BRL")
-	case "!btc dollar", "!btc usd", "!bitcoin dollar", "!bitcoin usd":
-		result, err = economia.GetQuote("BTC-USD")
-	case "!eth", "!etherium":
-		result, err = economia.GetQuote("ETH-BRL")
-	case "!help":
+	switch {
+
+	// Convert currency amount
+	case strings.HasPrefix(m.Content, "!q"):
+		s.ChannelMessageSend(m.ChannelID, ConvertMessage(m.Content))
+
+		// List all commands
+	case strings.HasPrefix(m.Content, "!help"):
 		s.ChannelMessageSend(m.ChannelID, fmt.Sprint(
 			"```makefile\n",
-			"!dollar ptax or !usd ptax -> Show Current PTAX Dollar in BRL\n",
-			"!dollar or !usd -> Show Current Dollar in BRL\n",
-			"!euro or !eur -> Show Current Euro in BRL\n",
-			"!btc or !bitcoin -> Show Current BTC in BRL\n",
-			"!btc dollar or !bitcoin dollar or !btc usd or !bitcoin usd -> Show Current BTC in USD-Dollar \n",
-			"!eth or !etherium -> Show Current ETH in BRL\n",
+			"!help -> List commands\n",
 			"!q <Abbreviation1> <Abbreviation2> -> Show Current <Abbreviation1> in <Abbreviation2> \n",
 			"Example: \n!q usd brl -> Show Current Dollar in BR\n",
+			"!q <Abbreviation1> <Abbreviation2> <Amount value> -> Show Current <Abbreviation1> in <Abbreviation2><Amount value>\n",
+			"Example: \n!q usd brl 2.50 -> Show Current Amount in BR, R$ 15,00\n",
 			"```\n",
 		))
+
 	// Do nothing if none of the conditions are satisfied.
 	default:
-		if !strings.HasPrefix(m.Content, "!q") {
-			return
-		}
-		currencySymbol, quoteCurrencys, err = NomalizationQuotes(m.Content)
-		if err != nil {
-			fmt.Print(err)
-			return
-		}
-		result, err = economia.GetQuote(currencySymbol)
-	}
-
-	if err != nil {
-		fmt.Print(err)
-		s.ChannelMessageSend(m.ChannelID, "failed to search quote currency")
-	}
-
-	// send quote current message in the channel if result.Bid has a value
-	if result.Bid > 0 {
-		// choose the correct symbol to send in discord message
-		quoteSymbol := "$"
-		switch quoteCurrencys[1] {
-		case "brl":
-			quoteSymbol = "R$"
-		case "eur":
-			quoteSymbol = "€"
-		}
-
-		// send discord message
-		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("%s %.2f", quoteSymbol, result.Bid))
+		return
 	}
 
 }

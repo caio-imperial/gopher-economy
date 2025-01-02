@@ -10,11 +10,17 @@
 GopherEconomy is a Discord bot built with [Go (Golang)](https://go.dev/) to provide currenty  quote, economic data, and market insights. Designed for simplicity and efficiency, Gophernomy is perfect for anyone who wants quick access to market data.
 
 
-## Features 1.0.0
-
-- [ ] 💱 Delete all commands except !help and !q.
+## Features 1.1.0
 
 - [ ] 🧪 Implement Tests: Create and add tests to ensure functionality and code quality.
+
+- [ ] Feat: Implement log.
+
+## feature 1.0.0
+
+- [x] 💱 Delete all commands except !help and !q.
+
+- [x] Feat:Convert a specific amount from one currency to another.
 
 ## Fix 0.3.1
 
@@ -90,15 +96,13 @@ go run main.go
 # Discord Commands
 
 ```makefile
-!dollar ptax or !usd ptax -> Show Current PTAX Dollar in BRL (deprecated)
-!dollar or !usd -> Show Current Dollar in BRL (deprecated)
-!euro or !eur -> Show Current Euro in BRL (deprecated)
-!btc or !bitcoin -> Show Current BTC in BRL (deprecated)
-!btc dollar or !bitcoin dollar or !btc usd or !bitcoin usd -> Show Current BTC in USD-Dollar (deprecated)
+!help -> List commands
 !q <Abbreviation1> <Abbreviation2> -> Show Current <Abbreviation1> in <Abbreviation2>
 Example:
 !q usd brl -> Show Current Dollar in BR
-!eth or !etherium -> Show Current ETH in BRL
+!q <Abbreviation1> <Abbreviation2> <Amount value> -> Show Current <Abbreviation1> in <Abbreviation2><Amount value>
+Example:
+!q usd brl 2.50 -> Show Current Amount in BR, R$ 15,00
 ```
 
 # Contributing
