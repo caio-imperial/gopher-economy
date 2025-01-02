@@ -96,15 +96,13 @@ go run main.go
 # Discord Commands
 
 ```makefile
-!dollar ptax or !usd ptax -> Show Current PTAX Dollar in BRL (deprecated)
-!dollar or !usd -> Show Current Dollar in BRL (deprecated)
-!euro or !eur -> Show Current Euro in BRL (deprecated)
-!btc or !bitcoin -> Show Current BTC in BRL (deprecated)
-!btc dollar or !bitcoin dollar or !btc usd or !bitcoin usd -> Show Current BTC in USD-Dollar (deprecated)
+!help -> List commands
 !q <Abbreviation1> <Abbreviation2> -> Show Current <Abbreviation1> in <Abbreviation2>
 Example:
 !q usd brl -> Show Current Dollar in BR
-!eth or !etherium -> Show Current ETH in BRL
+!q <Abbreviation1> <Abbreviation2> <Amount value> -> Show Current <Abbreviation1> in <Abbreviation2><Amount value>
+Example:
+!q usd brl 2.50 -> Show Current Amount in BR, R$ 15,00
 ```
 
 # Contributing
