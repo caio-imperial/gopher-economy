@@ -10,11 +10,17 @@
 GopherEconomy is a Discord bot built with [Go (Golang)](https://go.dev/) to provide currenty  quote, economic data, and market insights. Designed for simplicity and efficiency, Gophernomy is perfect for anyone who wants quick access to market data.
 
 
-## Features 1.0.0
-
-- [ ] 💱 Delete all commands except !help and !q.
+## Features 1.1.0
 
 - [ ] 🧪 Implement Tests: Create and add tests to ensure functionality and code quality.
+
+- [ ] Feat: Implement log.
+
+## feature 1.0.0
+
+- [x] 💱 Delete all commands except !help and !q.
+
+- [x] Feat:Convert a specific amount from one currency to another.
 
 ## Fix 0.3.1
 
