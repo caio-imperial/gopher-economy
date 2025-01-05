@@ -9,7 +9,7 @@ import (
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/caiosilvestre/gopher-economy/integrations/awesomeapi/economia"
-	"github.com/joho/godotenv"
+	"github.com/caiosilvestre/gopher-economy/logger"
 )
 
 var (
@@ -20,25 +20,25 @@ var (
 // Init initializes all environment variables, configures the Discord bot,
 // and registers callback functions on the handler.
 func Init() (err error) {
-	godotenv.Load(".env")
+	appLogger := logger.GetLogger()
 
 	discord_token = os.Getenv("DISCORD_TOKEN")
 	if discord_token == "" {
-		fmt.Printf("DISCORD_TOKEN not set in environment\n")
+		appLogger.Error("DISCORD_TOKEN not set in environment")
 		return
 	}
 
 	//start package economia
 	err = economia.Init()
 	if err != nil {
-		fmt.Printf("error economia.Init(): %v\n", err)
+		appLogger.Error("error start economia", "err", err)
 		return
 	}
 
 	//init discord bot session
 	dg, err := discordgo.New("Bot " + discord_token)
 	if err != nil {
-		fmt.Printf("error creating Discord session: %v\n", err)
+		appLogger.Error("error creating Discord session", "err", err)
 		return
 	}
 
@@ -51,14 +51,13 @@ func Init() (err error) {
 	//Open conection with discord
 	err = dg.Open()
 	if err != nil {
-		fmt.Println("error opening connection,", err)
+		appLogger.Error("error opening connection", "err", err)
 		return
 	}
 
 	//Close conection with discord
 	defer dg.Close()
-
-	fmt.Println("Bot is Online")
+	appLogger.Info("Bot is Online", "status", "active")
 
 	// Close the connection with Discord gracefully when Ctrl+C is pressed in the terminal.
 	// A channel is created to listen for termination signals (SIGINT, SIGTERM, or os.Interrupt).
@@ -72,21 +71,26 @@ func Init() (err error) {
 // messageHandler is a callback function that processes messages from the channel
 // and returns an appropriate response.
 func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
-
 	// Ignore messages from the bot itself
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
+
+	// Init message logger with credentials
+	messageLogger := InitMessageLogger(m)
 
 	// Compares the received message and responds if the condition is true.
 	switch {
 
 	// Convert currency amount
 	case strings.HasPrefix(m.Content, "!q"):
-		s.ChannelMessageSend(m.ChannelID, ConvertMessage(m.Content))
+		messageLogger.Info("Valid command detected", "command_received", "!q")
+		s.ChannelMessageSend(m.ChannelID, ConvertMessage(messageLogger, m.Content))
+		messageLogger.Info("Command executed successfully", "command_execute", "!q")
 
-		// List all commands
+	// List all commands
 	case strings.HasPrefix(m.Content, "!help"):
+		messageLogger.Info("Valid command detected", "command_received", "!help")
 		s.ChannelMessageSend(m.ChannelID, fmt.Sprint(
 			"```makefile\n",
 			"!help -> List commands\n",
@@ -96,6 +100,7 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 			"Example: \n!q usd brl 2.50 -> Show Current Amount in BR, R$ 15,00\n",
 			"```\n",
 		))
+		messageLogger.Info("Command executed successfully", "command_execute", "!help")
 
 	// Do nothing if none of the conditions are satisfied.
 	default:
