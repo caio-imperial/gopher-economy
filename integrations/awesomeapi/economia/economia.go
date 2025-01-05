@@ -10,6 +10,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/caiosilvestre/gopher-economy/logger"
 	"github.com/joho/godotenv"
 )
 
@@ -68,17 +69,24 @@ func concatUrlPath(path string) (urlFull string, err error) {
 // GetQuote get the information about quotes.
 // @param currencySymbol: Simbol of quote.
 // @return: quoteCurrency: quote currency.
-func GetQuote(currencySymbol string) (quoteCurrency QuoteCurrency, err error) {
+func GetQuote(ctxLogger *logger.AppLogger, currencySymbol string) (quoteCurrency QuoteCurrency, err error) {
+	endpoint := fmt.Sprintf("/json/last/%s", currencySymbol)
+	ctxLogger.Info(
+		"Making API requests",
+		"endpoint", endpoint)
 	// Concatenate the base URL with the currency symbol to form the full URL.
-	urlFull, err := concatUrlPath(fmt.Sprintf("/json/last/%s", currencySymbol))
+	urlFull, err := concatUrlPath(endpoint)
 	if err != nil {
+		ctxLogger.Error("API request failed", "endpoint", endpoint)
 		return
 	}
 
 	// Get information about quote currency
 	resp, err := http.Get(urlFull)
 	if err != nil {
-		fmt.Println("Error request:", err)
+		ctxLogger.Error(
+			"Failed to make API request",
+			"endpoint", endpoint)
 		return
 	}
 
@@ -87,7 +95,9 @@ func GetQuote(currencySymbol string) (quoteCurrency QuoteCurrency, err error) {
 	// Convert body information into []byte
 	bodyByte, err := io.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println("Error reading response:", err)
+		ctxLogger.Error(
+			"Failed to read response in body",
+			"endpoint", endpoint)
 		return
 	}
 
@@ -95,15 +105,23 @@ func GetQuote(currencySymbol string) (quoteCurrency QuoteCurrency, err error) {
 	var result map[string]QuoteCurrency
 	err = json.Unmarshal(bodyByte, &result)
 	if err != nil {
-		fmt.Println("Error convert map[string]QuoteCurrency:", err)
+		ctxLogger.Error(
+			"Failed to convert body in map[string]QuoteCurrency",
+			"endpoint", endpoint)
 		return
 	}
 
 	// Convert result information into QuoteCurrency
 	quoteCurrency, isValid := result[strings.Replace(currencySymbol, "-", "", -1)]
 	if !isValid {
-		fmt.Print("Error reading response currencySymbol is Invalid")
+		ctxLogger.Error(
+			"Failed to convert currencySymbol",
+			"currencySymbol", currencySymbol,
+			"endpoint", endpoint)
 		return
 	}
+	ctxLogger.Info(
+		"API requests successful",
+		"endpoint", endpoint)
 	return
 }
