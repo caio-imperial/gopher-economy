@@ -16,40 +16,16 @@ GopherEconomy is a Discord bot built with [Go (Golang)](https://go.dev/) to prov
 
 - [ ] Feat: Implement log.
 
-## feature 1.0.0
+## Feature 1.0.1
+
+- [x] Bug Report: Command Fails with Multiple Spaces Between !q and Abbreviation
+
+## Feature 1.0.0
 
 - [x] 💱 Delete all commands except !help and !q.
 
 - [x] Feat:Convert a specific amount from one currency to another.
 
-## Fix 0.3.1
-
-- [x] Fix: run application without .env.
-
-## Features 0.3.0
-
-- [x] 🚀 Implement Deploy: Set up and automate the deployment process to ensure continuous and seamless delivery of new versions.
-
-## Features 0.2.0
-
-- [x] 💱 Universal Conversion: Check the current price of any QuoteCurrency.
-
-
-## Features 0.1.0
-
-- [x] 💱 BTC/USD Conversion: Check the current price of Bitcoin in US Dollars.
-
-## Features 0.0.1
-
-- [x] 💱 USD/BRL Conversion: Check the current price of US Dollars in Brazilian Real.
-
-- [x] 💱 BTC/USD Conversion: Check the current price of Bitcoin in Brazilian Real.
-
-- [x] 💱 EUR/BRL Conversion: Check the current price of Euro in Brazilian Real.
-
-- [x] 💱 ETH/BRL Conversion: Check the current price of Ethereum in Brazilian Real.
-
-- [x] 📜 HELP command: List all the commands.
 
 # Getting Started
 
