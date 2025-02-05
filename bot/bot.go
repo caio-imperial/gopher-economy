@@ -88,6 +88,14 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		message := cleanUpMultipleSpaces(m.Content)
 		s.ChannelMessageSend(m.ChannelID, ConvertMessage(message))
 
+	// Show the information about repository
+	case strings.HasPrefix(m.Content, "!git"):
+		s.ChannelMessageSend(m.ChannelID, fmt.Sprint(
+			" Feel free to fork the repository, make your changes, and submit a pull request.",
+			" We appreciate your contributions!\n",
+			" [Git Repository URL](https://github.com/caio-imperial/gopher-economy)",
+		))
+
 		// List all commands
 	case strings.HasPrefix(m.Content, "!help"):
 		s.ChannelMessageSend(m.ChannelID, fmt.Sprint(
