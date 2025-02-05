@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"regexp"
 	"strings"
 	"syscall"
 
@@ -83,7 +84,9 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	// Convert currency amount
 	case strings.HasPrefix(m.Content, "!q"):
-		s.ChannelMessageSend(m.ChannelID, ConvertMessage(m.Content))
+		// Clean up multiple spaces in the message
+		message := cleanUpMultipleSpaces(m.Content)
+		s.ChannelMessageSend(m.ChannelID, ConvertMessage(message))
 
 		// List all commands
 	case strings.HasPrefix(m.Content, "!help"):
@@ -102,4 +105,10 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
+}
+
+// Function to clean up multiple spaces in a string.
+func cleanUpMultipleSpaces(message string) string {
+	spaceReCleanUp := regexp.MustCompile(`\s+`)
+	return spaceReCleanUp.ReplaceAllString(strings.TrimSpace(message), " ")
 }
