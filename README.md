@@ -61,6 +61,8 @@ Example:
 !q <Abbreviation1> <Abbreviation2> <Amount value> -> Show Current <Abbreviation1> in <Abbreviation2><Amount value>
 Example:
 !q usd brl 2.50 -> Show Current Amount in BR, R$ 15,00
+!git -> Feel free to fork the repository, make your changes, and submit a pull request.We appreciate your contributions!
+[Git Repository URL](https://github.com/caio-imperial/gopher-economy)
 ```
 
 # Contributing
