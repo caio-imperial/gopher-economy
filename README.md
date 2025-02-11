@@ -62,7 +62,7 @@ Example:
 Example:
 !q usd brl 2.50 -> Show Current Amount in BR, R$ 15,00
 !git -> Feel free to fork the repository, make your changes, and submit a pull request.We appreciate your contributions!
-[Git Repository URL](https://github.com/caio-imperial/gopher-economy)
+[Git Repository URL]: (https://github.com/caio-imperial/gopher-economy)
 ```
 
 # Contributing
