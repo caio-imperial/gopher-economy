@@ -62,6 +62,46 @@ Example:
 Example:
 !q usd brl 2.50 -> Show Current Amount in BR, R$ 15,00
 ```
+# Using Git in Jupyter Notebooks or Google Colab
+
+If you're working in a Jupyter Notebook or Google Colab environment, you can use !git commands to manage your repository directly from the notebook.
+
+###Common Git Commands:
+
+- Clone the repository:
+
+```bash
+!git clone https://github.com/yourusername/GopherEconomy.git
+```
+- Check the status of the repository:
+
+```bash
+!git status
+```
+
+- Pull the latest changes from the remote repository:
+
+```bash
+!git pull origin main
+```
+
+- Add changes to staging:
+
+```bash
+!git add .
+```
+
+- Commit changes:
+
+```bash
+!git commit -m "Your commit message"
+```
+
+- Push changes to GitHub:
+
+```bash
+!git push origin main
+```
 
 # Contributing
 
