@@ -37,6 +37,20 @@ func GetCurrencySymbol(currencyCode string) string {
 	}
 }
 
+// parseAmount handles both comma and period decimal separators
+func parseAmount(amountStr string) (float64, error) {
+	// Replace comma with period for parsing
+	normalizedAmount := strings.Replace(amountStr, ",", ".", 1)
+
+	// Try to parse the normalized string
+	amount, err := strconv.ParseFloat(normalizedAmount, 64)
+	if err != nil {
+		return 0, fmt.Errorf("invalid number format: %s", amountStr)
+	}
+
+	return amount, nil
+}
+
 // Return a messagen with convert currency
 func ConvertMessage(message string) string {
 	// Convert discord message in Array
@@ -63,12 +77,13 @@ func ConvertMessage(message string) string {
 
 	// check amount was provided
 	if arraySize > 3 {
-		// convert amount to float64
-		amount, err = strconv.ParseFloat(messageArray[3], 64)
+		// Parse amount with support for both comma and period
+		parsedAmount, err := parseAmount(messageArray[3])
 		if err != nil {
 			fmt.Println("Erro: a string fornecida não pode ser convertida em float64")
 			return "invalid amount value: the provided value is not a valid number"
 		}
+		amount = parsedAmount
 	}
 
 	// convert amount currency provided
