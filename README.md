@@ -9,6 +9,11 @@
 
 GopherEconomy is a Discord bot built with [Go (Golang)](https://go.dev/) to provide currenty  quote, economic data, and market insights. Designed for simplicity and efficiency, Gophernomy is perfect for anyone who wants quick access to market data.
 
+# Contributing
+@caio-imperial [![wakatime](https://wakatime.com/badge/user/a3fbc69d-ef06-4051-bb33-ae0dfad69628/project/cc6afe81-a08d-4762-a230-1fd772fb03df.svg)](https://wakatime.com/badge/user/a3fbc69d-ef06-4051-bb33-ae0dfad69628/project/cc6afe81-a08d-4762-a230-1fd772fb03df)
+
+Contributions are welcome!
+
 # Getting Started
 
 ### Prerequisites:
@@ -65,10 +70,6 @@ Example:
 Example:
 !git -> https://github.com/caio-imperial/gopher-economy
 ```
-
-# Contributing
-
-Contributions are welcome!
 
 # Support
 
